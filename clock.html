@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digitalclock</title>
+    <style>
+        .clock {
+            position: absolute;
+            top: 80%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            color: rgba(181, 156, 77, 0.881);
+            font-size: 60px;
+            font-family: Orbitron;
+            letter-spacing: 7px;
+            background-color: #000000;
+            opacity: 0.6;
+            filter: alpha(opacity=60);
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        #hero {
+            position: relative;
+        }
+        
+        #hero video {
+            height: 100vh;
+            width: 100%;
+            background-position: absolute;
+            z-index: 10;
+            object-fit: cover;
+        }
+        
+        #hero .content {
+            background: rgba(0, 0, 0, 0.5);
+            height: 100%;
+            width: 100%;
+            z-index: 20;
+            position: absolute;
+            top: 0;
+            left: 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #hero .content h1 {
+            color: #FFF;
+            font-family: Arial, sans-serif;
+        }
+        
+        #hero .content p {
+            font-size: 18px;
+            color: black;
+            font-family: Arial, sans-serif;
+            position: absolute;
+            top: 90%;
+            left: 85%;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="hero">
+
+        <video autoplay loop muted>
+          <source src="Istanbul, Turkey 🇹🇷 - by drone [4K].webm" type="video/mp4">
+        </video>
+
+        <div class="content">
+            <div class="container">
+                <div id="MyClockDisplay" class="clock" onload="showTime()"></div>
+                <p>created by burkut-2022</p>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        function showTime() {
+            var date = new Date();
+            var h = date.getHours(); // 0 - 23
+            var m = date.getMinutes(); // 0 - 59
+            var s = date.getSeconds(); // 0 - 59
+            var session = "AM";
+
+            if (h == 0) {
+                h = 12;
+            }
+
+            if (h > 12) {
+                h = h - 12;
+                session = "PM";
+            }
+
+            h = (h < 10) ? "0" + h : h;
+            m = (m < 10) ? "0" + m : m;
+            s = (s < 10) ? "0" + s : s;
+
+            var time = h + ":" + m + ":" + s + " " + session;
+            document.getElementById("MyClockDisplay").innerText = time;
+            document.getElementById("MyClockDisplay").textContent = time;
+
+            setTimeout(showTime, 1000);
+
+        }
+
+        showTime();
+    </script>
+</body>
+
+</html>
